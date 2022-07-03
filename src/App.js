@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { renderRoutes } from "./routes";
+import { Suspense } from "react";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback={<div>loading...</div>}>
+      <BrowserRouter>
+        <Routes>
+          {renderRoutes()}
+          {/* Home Template */}
+          {/* <Route path="" element={<Home />}>
+          <Route index element={<HomePage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="list-movie" element={<ListMoviePage />} />
+          <Route path="hook" element={<HookPage />} />
+          <Route path="hoc" element={<HocPage />} />
+          <Route path="/detail/:id" element={<DetailMovie />} />
+          <Route path="spring" element={<DemoReactSpring />} />
+        </Route> */}
+          {/* Redirect to admin/dashboard */}
+          <Route
+            path="admin"
+            element={<Navigate replace to="/admin/dashboard" />}
+          />
+          {/* Auth Page */}
+          {/* <Route path="auth" element={<AuthPage />} /> */}
+
+          {/* Admin Template */}
+          {/* <Route path="admin" element={<Admin />}>
+          <Route path="dashboard" element={<DashboardPage />} />
+          <Route path="add-user" element={<AddUSerPage />} />
+          <Route path="add-movie" element={<AddMoviePage />} />
+        </Route>
+
+        <Route path="*" element={<PageNotFound />} /> */}
+        </Routes>
+      </BrowserRouter>
+    </Suspense>
   );
 }
 
